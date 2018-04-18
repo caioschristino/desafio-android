@@ -19,7 +19,7 @@ import javax.inject.Singleton
 @Singleton
 class SessionController
 @Inject
-constructor(@ApplicationContext val mContext: Context) {
+constructor(@param:ApplicationContext val mContext: Context) {
     private val NOTICE_KEY = "NOTICE"
     private val CHARGEBACK_KEY = "CHARGEBACK"
 

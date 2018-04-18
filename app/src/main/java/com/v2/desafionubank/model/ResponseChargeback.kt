@@ -1,5 +1,7 @@
 package com.v2.desafionubank.model
 
+import java.util.*
+
 /**
  * Created by CaioSChristino on 18/04/18.
  */
@@ -10,5 +12,5 @@ class ResponseChargeback {
     val title: String? = null
     val links: Links? = null
     val hint: String? = null
-    val details: List<ReasonDetails>? = null
+    val details: ArrayList<ReasonDetails>? = null
 }

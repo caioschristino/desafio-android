@@ -55,7 +55,7 @@ abstract class ObserverController<T>(private val mContext: Context) : Observer<T
                 .send(ResponseError(error))
     }
 
-    fun ignoreLoader(): Boolean {
+    open fun ignoreLoader(): Boolean {
         return false
     }
 }

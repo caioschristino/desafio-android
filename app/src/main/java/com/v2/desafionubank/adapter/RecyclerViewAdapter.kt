@@ -9,7 +9,7 @@ import java.util.*
  * Created by CaioSChristino on 18/04/18.
  */
 
-public abstract class RecyclerViewAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder> {
+abstract class RecyclerViewAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private var mContext: Context? = null
     private var mItems: MutableList<T> = ArrayList()
 
