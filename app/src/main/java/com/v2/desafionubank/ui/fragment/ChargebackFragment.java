@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.v2.desafionubank.R;
 import com.v2.desafionubank.adapter.RecyclerViewAdapter;
-import com.v2.desafionubank.controller.ObserverController;
 import com.v2.desafionubank.model.ReasonDetails;
 import com.v2.desafionubank.model.ResponseChargeback;
 import com.v2.desafionubank.model.ResponsePost;

@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.v2.desafionubank.R;
 import com.v2.desafionubank.adapter.RecyclerViewAdapter;
-import com.v2.desafionubank.controller.ObserverController;
 import com.v2.desafionubank.model.NoticeAction;
 import com.v2.desafionubank.model.ResponseNotice;
 import com.v2.desafionubank.ui.BaseFragment;
