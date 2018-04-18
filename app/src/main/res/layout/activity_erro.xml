@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackGround">
+
+    <TextView
+        android:id="@+id/icon_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:text="@string/icon_error"
+        android:textColor="@color/colorClosedGray"
+        android:textSize="50dp" />
+
+    <TextView
+        android:id="@+id/error_ops"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/icon_error"
+        android:layout_centerHorizontal="true"
+        android:text="@string/error_ops"
+        android:textColor="@color/colorDisplayGray"
+        android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/about_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/close_btn"
+        android:layout_below="@+id/error_ops"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:textColor="@color/colorDisplayGray"
+        android:textSize="30dp" />
+
+    <Button
+        android:id="@+id/close_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:background="?attr/selectableItemBackground"
+        android:text="@string/close_btn"
+        android:textColor="@color/colorDisplayGray" />
+</RelativeLayout>
