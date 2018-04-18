@@ -25,9 +25,50 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    //Bibliotecas de Suporte
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
+    implementation "com.android.support:support-v4:$supportLibraryVersion"
+    implementation "com.android.support:cardview-v7:$cardView"
+    implementation "com.android.support:design:$supportLibraryVersion"
+    implementation "com.android.support.constraint:constraint-layout:$supportContrainstLayout"
+    implementation "com.timqi.sectorprogressview:library:$sectorProgressView"
+    implementation "com.j256.ormlite:ormlite-android:$ormLiteVersion"
+
+    //Bibliotecas Square
+    implementation "com.squareup.picasso:picasso:$picassoVersion"
+    implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit2Version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit2Version"
+
+    // OkHttp
+    implementation "com.squareup.okhttp3:okhttp:$okHttpVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
+
+
+    implementation "com.android.support:support-vector-drawable:$drawableVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterknifeVersion"
+    implementation "com.jakewharton:butterknife:$butterknifeVersion"
+
+    //Bibliotecas RX"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+    implementation "io.reactivex.rxjava2:rxjava:$rxJava2Version"
+    implementation "com.squareup.retrofit2:adapter-rxjava:$rxJava2AdapterVersion"
+    implementation "com.google.code.gson:gson:$converterGsonVersion"
+    implementation "javax.annotation:jsr250-api:$javaxAnnotationVersion"
+    implementation "javax.inject:javax.inject:$javaxInjectVersion"
+
+    //Bibliotecas de DI
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
+
+    //Bibliotecas de Testes
+    testImplementation "junit:junit:$junitVersion"
+    androidTestImplementation "com.android.support.test:runner:$testRunnerVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-intents:$espressoVersion"
 }

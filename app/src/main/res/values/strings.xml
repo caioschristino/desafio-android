@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Desafio Nubank</string>
+    <string name="text_lock_on">Cartão desbloqueado, recomendamos mantê-lo bloqueado.</string>
+    <string name="text_lock_off">Bloqueamos preventivamenteo seu cartão.</string>
+    <string name="cancel_btn">CANCELAR</string>
+    <string name="contest_btn">CONTESTAR</string>
+    <string name="close_btn">FECHAR</string>
+    <string name="success_request">Fique de olho no seu email! Nos próximos\n 3 dias você deverá receber um primeiro\n retorno sobre sua contestação.</string>
+    <string name="dialog_title">Contestação de\n compra recebida</string>
+    <string name="switch_on">sim</string>
+    <string name="switch_off">não</string>
+    <string name="icon_error">;(</string>
+    <string name="error_ops">ops!</string>
 </resources>
