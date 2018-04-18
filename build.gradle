@@ -20,6 +20,34 @@ allprojects {
         google()
         jcenter()
     }
+
+    project.ext {
+        compileSdkVersion = 26
+        supportLibraryVersion = '26.1.0'
+        supportContrainstLayout = '1.0.2'
+        sectorProgressView = '2.0.1'
+        cardView = '26.1.0'
+        picassoVersion = '2.5.2'
+        retrofit2Version = '2.1.0'
+        butterknifeVersion = '8.8.1'
+        converterGsonVersion = '2.8.2'
+        daggerVersion = '2.9'
+        drawableVersion = '26.1.0'
+        ormLiteVersion = '4.48'
+
+        rxJava2Version = '2.1.8'
+        rxAndroidVersion = '2.0.1'
+        rxJava2AdapterVersion = '2.0.2'
+
+        junitVersion = '4.12'
+        espressoVersion = '3.0.1'
+        testRunnerVersion = '1.0.1'
+        okHttpVersion = '3.3.1'
+
+        javaxAnnotationVersion = '1.0'
+        javaxInjectVersion = '1'
+
+    }
 }
 
 task clean(type: Delete) {
