@@ -6,4 +6,6 @@ Pela Complexidade do projeto, optei pelo padrão MVC, injetando o controller na 
 
 Utilizou-se RXJava para controle de entrega assincorna e explorando a programação reativa funcional assim como o padrão observable.
 
-Foram cronstruídos alguns componentes para resolver problemas recorrente como a listagem de elementos, utilizando classes genéricos e exercendo os principios KISS e SOLID. 
+Foram construídos alguns componentes para resolver problemas recorrente como a listagem de elementos, utilizando classes genéricos e exercendo os princípios KISS e SOLID. 
+
+Para testes, utilizou-se Robolectric e JUnit.
