@@ -7,11 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import butterknife.ButterKnife
 import com.v2.desafionubank.ChargebackApplication
 import com.v2.desafionubank.R
 import com.v2.desafionubank.controller.SessionController
+import com.v2.desafionubank.di.component.ApplicationComponent
+import com.v2.desafionubank.di.component.DaggerApplicationComponent
+import com.v2.desafionubank.di.component.DaggerFragmentComponent
 import com.v2.desafionubank.di.component.FragmentComponent
+import com.v2.desafionubank.di.module.ActivityModule
+import com.v2.desafionubank.di.module.AndroidModule
 import com.v2.desafionubank.di.module.FragmentModule
 import javax.inject.Inject
 
@@ -21,15 +25,19 @@ import javax.inject.Inject
 
 abstract class BaseFragment : Fragment() {
     @Inject
-    internal var mNavigationManager: NavigationManager? = null
+    lateinit var mNavigationManager: NavigationManager
     @Inject
-    protected var mSessionController: SessionController? = null
+    lateinit var mSessionController: SessionController
 
-    internal var mFragmentComponent: FragmentComponent? = null
     internal lateinit var view: View
 
     abstract val title: String
 
+    protected abstract fun setContent(): Int
+
+    abstract fun doInBackFragment()
+
+    internal var mFragmentComponent: FragmentComponent? = null
     private val fragmentComponent: FragmentComponent
         get() {
             if (mFragmentComponent == null) {
@@ -41,20 +49,12 @@ abstract class BaseFragment : Fragment() {
             return mFragmentComponent as FragmentComponent
         }
 
-    protected abstract fun initViews()
-
-    protected abstract fun setContent(): Int
-
-    abstract fun doInBackFragment()
-
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         view = inflater!!.inflate(setContent(), null)
-        ButterKnife.bind(this, view)
-        fragmentComponent.inject(this)
-        initActionBar(true, getString(R.string.app_name))
-        initViews()
+        fragmentComponent.inject(this);
 
+        initActionBar(true, getString(R.string.app_name))
         return view
     }
 

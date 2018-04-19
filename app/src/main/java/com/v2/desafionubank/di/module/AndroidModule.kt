@@ -6,14 +6,16 @@ import android.content.SharedPreferences
 import com.v2.desafionubank.di.ApplicationContext
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 /**
  * Created by csanchez on 19/04/2018.
  */
 
 @Module
-class ApplicationModule(private val mApplication: Application) {
+class AndroidModule(private val mApplication: Application) {
     @Provides
+    @Singleton
     @ApplicationContext
     internal fun provideContext(): Context {
         return mApplication

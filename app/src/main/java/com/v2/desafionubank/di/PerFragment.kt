@@ -1,7 +1,6 @@
 package com.v2.desafionubank.di
 
-import java.lang.annotation.Retention
-import java.lang.annotation.RetentionPolicy
+import javax.inject.Qualifier
 import javax.inject.Scope
 
 /**
@@ -9,5 +8,5 @@ import javax.inject.Scope
  */
 
 @Scope
-@Retention(RetentionPolicy.RUNTIME)
+@Retention(AnnotationRetention.RUNTIME)
 annotation class PerFragment

@@ -1,20 +1,15 @@
 package com.v2.desafionubank.ui.activity
 
-import android.widget.TextView
-import butterknife.BindView
-import butterknife.OnClick
 import com.v2.desafionubank.R
 import com.v2.desafionubank.ui.BaseMain
 import com.v2.desafionubank.ui.NavigationManager
+import kotlinx.android.synthetic.main.activity_erro.*
 
 /**
  * Created by csanchez on 19/04/2018.
  */
 
 class ErrorActivity : BaseMain() {
-    @BindView(R.id.about_error)
-    internal var mAboutError: TextView? = null
-
     override fun layoutResID(): Int {
         return R.layout.activity_erro
     }
@@ -22,12 +17,11 @@ class ErrorActivity : BaseMain() {
     override fun initViews() {
         val b = intent.extras
         val error = b!!.getString(ERROR_MESSAGE)
-        mAboutError!!.text = error
-    }
+        about_error.text = error
 
-    @OnClick(R.id.close_btn)
-    fun onClickClose() {
-        onBackPressed()
+        close_btn.setOnClickListener{
+            onBackPressed()
+        }
     }
 
     override fun setBackNavigationListener(): NavigationManager.BackFragmentNavigationListener {

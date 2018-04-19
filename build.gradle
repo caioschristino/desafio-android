@@ -29,7 +29,6 @@ allprojects {
         cardView = '26.1.0'
         picassoVersion = '2.5.2'
         retrofit2Version = '2.1.0'
-        butterknifeVersion = '8.8.1'
         converterGsonVersion = '2.8.2'
         daggerVersion = '2.9'
         drawableVersion = '26.1.0'

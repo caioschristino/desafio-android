@@ -1,10 +1,11 @@
 package com.v2.desafionubank.di.module
 
 import android.content.Context
-import com.v2.desafionubank.ui.BaseFragment
-import dagger.Provides
 import com.v2.desafionubank.di.FragmentContext
+import com.v2.desafionubank.ui.BaseFragment
 import dagger.Module
+import dagger.Provides
+
 
 
 /**

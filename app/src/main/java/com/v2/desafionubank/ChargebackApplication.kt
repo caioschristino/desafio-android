@@ -1,8 +1,9 @@
 package com.v2.desafionubank
 
 import android.app.Application
+import com.v2.desafionubank.di.module.AndroidModule
 import com.v2.desafionubank.di.component.ApplicationComponent
-import com.v2.desafionubank.di.module.ApplicationModule
+import com.v2.desafionubank.di.component.DaggerApplicationComponent
 
 /**
  * Created by csanchez on 19/04/2018.
@@ -24,7 +25,7 @@ class ChargebackApplication : Application() {
         app = this
         applicationComponent = DaggerApplicationComponent
                 .builder()
-                .applicationModule(ApplicationModule(this))
+                .androidModule(AndroidModule(this))
                 .build()
         applicationComponent.inject(this)
     }

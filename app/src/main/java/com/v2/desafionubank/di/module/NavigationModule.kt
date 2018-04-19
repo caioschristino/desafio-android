@@ -11,7 +11,6 @@ import javax.inject.Singleton
 
 @Module
 class NavigationModule {
-
     @Provides
     @Singleton
     protected fun provideNavigationManager(): NavigationManager {

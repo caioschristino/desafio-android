@@ -24,10 +24,10 @@ constructor(@param:ApplicationContext val mContext: Context) {
     private val CHARGEBACK_KEY = "CHARGEBACK"
 
     @Inject
-    internal var mNuMobileApi: NuMobileApi? = null
+    lateinit var mNuMobileApi: NuMobileApi
 
     @Inject
-    internal var mSharedPreferences: SharedPreferenceHelper? = null
+    lateinit var mSharedPreferences: SharedPreferenceHelper
 
     val chargeback: Observable<ResponseChargeback>
         get() {
