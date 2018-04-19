@@ -27,6 +27,9 @@ import com.v2.desafionubank.ui.view.ViewDialog
  */
 
 class ChargebackFragment : BaseFragment() {
+    override val title: String
+        get() = ""
+
     @BindView(R.id.chargeback_title)
     internal var mTitle: TextView? = null
     @BindView(R.id.padlock_image)
@@ -58,20 +61,18 @@ class ChargebackFragment : BaseFragment() {
 
     override fun initViews() {
         mRecyclerView!!.layoutManager = LinearLayoutManager(activity)
-        mSessionController
-                .chargeback
-                .subscribe(object : ObserverController<ResponseChargeback>(activity.applicationContext) {
-                    override fun onResult(item: ResponseChargeback) {
-                        if (item != null) {
-                            mContainerBlock!!.visibility = View.VISIBLE
-                            mAboutBlockEdit!!.hint = Html.fromHtml(item.hint)
-                            mTitle!!.text = item.title
-                            mPadLockImage!!.setImageDrawable(resources.getDrawable(R.drawable.ic_chargeback_lock))
-                            adapter.addItems(item.details!!)
-                            mRecyclerView!!.adapter = adapter
-                        }
-                    }
-                })
+        mSessionController?.chargeback?.subscribe(object : ObserverController<ResponseChargeback>(activity.applicationContext) {
+            override fun onResult(item: ResponseChargeback) {
+                if (item != null) {
+                    mContainerBlock!!.visibility = View.VISIBLE
+                    mAboutBlockEdit!!.hint = Html.fromHtml(item.hint)
+                    mTitle!!.text = item.title
+                    mPadLockImage!!.setImageDrawable(resources.getDrawable(R.drawable.ic_chargeback_lock))
+                    adapter.addItems(item.details!!)
+                    mRecyclerView!!.adapter = adapter
+                }
+            }
+        })
     }
 
 
@@ -81,10 +82,6 @@ class ChargebackFragment : BaseFragment() {
 
     override fun doInBackFragment() {
 
-    }
-
-    override fun getTitle(): String? {
-        return null
     }
 
     @OnClick(R.id.contest_btn)
@@ -98,23 +95,21 @@ class ChargebackFragment : BaseFragment() {
     }
 
     private fun blockUnblockCard(block: Boolean) {
-        mSessionController
-                .blockUnblockCard(block)
-                .subscribe(object : ObserverController<ResponsePost>(activity.applicationContext) {
-                    override fun onResult(item: ResponsePost) {
-                        if (item.isBlock) {
-                            mPadLockText!!.text = getString(R.string.text_lock_on)
-                            mPadLockImage!!.setImageDrawable(resources.getDrawable(R.drawable.ic_chargeback_lock))
-                        } else {
-                            mPadLockText!!.text = getString(R.string.text_lock_off)
-                            mPadLockImage!!.setImageDrawable(resources.getDrawable(R.drawable.ic_chargeback_unlock))
-                        }
-                    }
+        mSessionController?.blockUnblockCard(block)?.subscribe(object : ObserverController<ResponsePost>(activity.applicationContext) {
+            override fun onResult(item: ResponsePost) {
+                if (item.isBlock) {
+                    mPadLockText!!.text = getString(R.string.text_lock_on)
+                    mPadLockImage!!.setImageDrawable(resources.getDrawable(R.drawable.ic_chargeback_lock))
+                } else {
+                    mPadLockText!!.text = getString(R.string.text_lock_off)
+                    mPadLockImage!!.setImageDrawable(resources.getDrawable(R.drawable.ic_chargeback_unlock))
+                }
+            }
 
-                    override fun ignoreLoader(): Boolean {
-                        return true
-                    }
-                })
+            override fun ignoreLoader(): Boolean {
+                return true
+            }
+        })
     }
 
     @OnClick(R.id.padlock_image)
@@ -130,13 +125,13 @@ class ChargebackFragment : BaseFragment() {
 
     @OnClick(R.id.contest_btn)
     fun sendContest() {
-        mSessionController
-                .sendContest(mAboutBlockEdit!!.text.toString(), adapter.getmItems())
-                .subscribe(object : ObserverController<ResponsePost>(activity.applicationContext) {
-                    override fun onResult(item: ResponsePost) {
-                        ViewDialog().showDialog(activity) { popSelf() }
-                    }
-                })
+        mSessionController?.sendContest(mAboutBlockEdit!!.text.toString(), adapter.getmItems())?.subscribe(object : ObserverController<ResponsePost>(activity.applicationContext) {
+            override fun onResult(item: ResponsePost) {
+                ViewDialog().showDialog(activity).run {
+                    popSelf()
+                }
+            }
+        })
         hideKeyboard()
     }
 }

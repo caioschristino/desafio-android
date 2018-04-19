@@ -4,6 +4,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.Html
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import butterknife.BindView
@@ -21,6 +22,9 @@ import java.util.ArrayList
  */
 
 class NoticeFragment : BaseFragment() {
+    override val title: String
+        get() = ""
+
     @BindView(R.id.title_notice)
     internal var mTitle: TextView? = null
     @BindView(R.id.body_notice)
@@ -39,12 +43,12 @@ class NoticeFragment : BaseFragment() {
             if (holder is ActionViewHolder) {
 
                 holder.setTitle(item)
-                holder.setOnclick {
+                holder.setOnclick(View.OnClickListener {
                     when (item.action) {
                         "continue" -> pushFragment(ChargebackFragment())
                         "cancel" -> popSelf()
                     }
-                }
+                })
             }
         }
     }
@@ -52,22 +56,21 @@ class NoticeFragment : BaseFragment() {
     override fun initViews() {
         mRecyclerView!!.layoutManager = LinearLayoutManager(activity)
         val mActions = ArrayList<NoticeAction>()
-        mSessionController.getNotice("https://nu-mobile-hiring.herokuapp.com/")
-                .subscribe(object : ObserverController<ResponseNotice>(activity.applicationContext) {
-                    override fun onResult(item: ResponseNotice) {
-                        mTitle!!.text = item.title
-                        mBody!!.text = Html.fromHtml(item.description)
+        mSessionController?.getNotice("https://nu-mobile-hiring.herokuapp.com/")?.subscribe(object : ObserverController<ResponseNotice>(activity.applicationContext) {
+            override fun onResult(item: ResponseNotice) {
+                mTitle!!.text = item.title
+                mBody!!.text = Html.fromHtml(item.description)
 
-                        if (null != item.primaryAction) {
-                            mActions.add(item.primaryAction)
-                        }
-                        if (null != item.secondaryAction) {
-                            mActions.add(item.secondaryAction)
-                        }
-                        adapter.addItems(mActions)
-                        mRecyclerView!!.adapter = adapter
-                    }
-                })
+                if (null != item.primaryAction) {
+                    mActions.add(item.primaryAction)
+                }
+                if (null != item.secondaryAction) {
+                    mActions.add(item.secondaryAction)
+                }
+                adapter.addItems(mActions)
+                mRecyclerView!!.adapter = adapter
+            }
+        })
     }
 
     override fun setContent(): Int {
@@ -76,9 +79,5 @@ class NoticeFragment : BaseFragment() {
 
     override fun doInBackFragment() {
 
-    }
-
-    override fun getTitle(): String {
-        return resources.getString(R.string.app_name)
     }
 }

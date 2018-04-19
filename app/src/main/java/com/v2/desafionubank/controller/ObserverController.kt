@@ -36,23 +36,20 @@ abstract class ObserverController<T>(private val mContext: Context) : Observer<T
     private fun showLoader() {
         if (!ignoreLoader()) {
             (this.mContext as ChargebackApplication)
-                    .bus
-                    .send(ProcessRequest(true))
+                    .bus?.send(ProcessRequest(true))
         }
     }
 
     private fun hideLoader() {
         if (!ignoreLoader()) {
             (this.mContext as ChargebackApplication)
-                    .bus
-                    .send(ProcessRequest(false))
+                    .bus?.send(ProcessRequest(false))
         }
     }
 
     private fun showError(error: String) {
         (this.mContext as ChargebackApplication)
-                .bus
-                .send(ResponseError(error))
+                .bus?.send(ResponseError(error))
     }
 
     open fun ignoreLoader(): Boolean {
