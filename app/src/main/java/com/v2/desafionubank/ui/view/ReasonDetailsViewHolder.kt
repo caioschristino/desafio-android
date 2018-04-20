@@ -16,7 +16,7 @@ class ReasonDetailsViewHolder(view: View) : BaseViewHolder(view) {
     init {
         val res = itemView.context.resources
         itemView.findViewById<Switch>(R.id.switch_about).setOnCheckedChangeListener { buttonView, isChecked ->
-            item.isSelected = isChecked
+            this.item.isSelected = isChecked
             if (isChecked) {
                 itemView.findViewById<Switch>(R.id.switch_about).textOn = res.getString(R.string.switch_on)
                 itemView.findViewById<TextView>(R.id.about).setTextColor(itemView.context.resources.getColor(R.color.colorRed))

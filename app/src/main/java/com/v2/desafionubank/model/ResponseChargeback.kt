@@ -11,6 +11,6 @@ class ResponseChargeback {
     val id: String? = null
     val title: String? = null
     val links: Links? = null
-    val hint: String? = null
-    val details: ArrayList<ReasonDetails>? = null
+    val comment_hint: String? = null
+    val reason_details: MutableList<ReasonDetails>? = null
 }

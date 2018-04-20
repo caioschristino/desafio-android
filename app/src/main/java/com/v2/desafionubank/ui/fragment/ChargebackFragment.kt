@@ -53,11 +53,11 @@ class ChargebackFragment : BaseFragment() {
                     override fun onResult(item: ResponseChargeback) {
                         if (item != null) {
                             container_block.visibility = View.VISIBLE
-//                            about_block.hint = Html.fromHtml(item.hint)
+                            about_block.hint = Html.fromHtml(item.comment_hint)
                             chargeback_title.text = item.title
                             padlock_image.setImageDrawable(resources.getDrawable(R.drawable.ic_chargeback_lock))
-//                            adapter.addItems(item.details!!)
-//                            recycle_details.adapter = adapter
+                            adapter.addItems(item.reason_details!!)
+                            recycle_details.adapter = adapter
                         }
                     }
                 })
@@ -80,8 +80,14 @@ class ChargebackFragment : BaseFragment() {
                     ?.sendContest(about_block.text.toString(), adapter.getmItems())
                     ?.subscribe(object : ObserverController<ResponsePost>(activity.applicationContext) {
                         override fun onResult(item: ResponsePost) {
-                            ViewDialog().showDialog(activity).run {
-                                popSelf()
+                            if (item.status.equals("O4k")) {
+                                ViewDialog().showDialog(activity, listener = object : ViewDialog.ViewDialogListener {
+                                    override fun onDismiss() {
+                                        popSelf()
+                                    }
+                                })
+                            } else {
+                                sendError(getString(R.string.error_text))
                             }
                         }
                     })

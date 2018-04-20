@@ -11,7 +11,12 @@ import com.v2.desafionubank.R
  */
 
 class ViewDialog {
-    fun showDialog(activity: FragmentActivity) {
+    interface ViewDialogListener {
+        fun onDismiss()
+    }
+
+
+    fun showDialog(activity: FragmentActivity, listener: ViewDialogListener) {
         val dialog = Dialog(activity)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
@@ -20,6 +25,7 @@ class ViewDialog {
         dialog.findViewById<View>(R.id.dialog_close)
                 .setOnClickListener({ v ->
                     dialog.dismiss()
+                    listener.onDismiss()
                 })
         dialog.show()
     }

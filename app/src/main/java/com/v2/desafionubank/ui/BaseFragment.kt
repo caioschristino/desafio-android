@@ -2,6 +2,7 @@ package com.v2.desafionubank.ui
 
 import android.content.Context
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,13 +11,10 @@ import android.view.inputmethod.InputMethodManager
 import com.v2.desafionubank.ChargebackApplication
 import com.v2.desafionubank.R
 import com.v2.desafionubank.controller.SessionController
-import com.v2.desafionubank.di.component.ApplicationComponent
-import com.v2.desafionubank.di.component.DaggerApplicationComponent
 import com.v2.desafionubank.di.component.DaggerFragmentComponent
 import com.v2.desafionubank.di.component.FragmentComponent
-import com.v2.desafionubank.di.module.ActivityModule
-import com.v2.desafionubank.di.module.AndroidModule
 import com.v2.desafionubank.di.module.FragmentModule
+import com.v2.desafionubank.model.ResponseError
 import javax.inject.Inject
 
 /**
@@ -89,5 +87,10 @@ abstract class BaseFragment : Fragment() {
         if (currentFocusedView != null) {
             inputManager.hideSoftInputFromWindow(currentFocusedView.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
         }
+    }
+
+    fun sendError(error: String) {
+        Snackbar.make(view, error, Snackbar.LENGTH_LONG)
+                .show();
     }
 }

@@ -2,6 +2,7 @@ package com.v2.desafionubank.controller
 
 import android.content.Context
 import com.v2.desafionubank.ChargebackApplication
+import com.v2.desafionubank.R
 import com.v2.desafionubank.model.ProcessRequest
 import com.v2.desafionubank.model.ResponseError
 import io.reactivex.Observer
@@ -26,7 +27,7 @@ abstract class ObserverController<T>(private val mContext: Context) : Observer<T
     }
 
     override fun onError(e: Throwable) {
-        showError("Ops! Tivemos um problema ao executar sua requisição. Tente novamente!")
+        showError(mContext.getString(R.string.error_text))
     }
 
     override fun onComplete() {
