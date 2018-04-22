@@ -13,6 +13,7 @@ kapt {
 }
 
 android {
+
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.v2.desafionubank"
@@ -37,7 +38,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
     //Bibliotecas de Suporte
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -60,7 +61,6 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:$okHttpVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
 
-
     //Bibliotecas RX"
     implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
     implementation "io.reactivex.rxjava2:rxjava:$rxJava2Version"
@@ -71,11 +71,16 @@ dependencies {
 
     //Bibliotecas de DI
     implementation "com.google.dagger:dagger:$daggerVersion"
-    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerCompilerVersion"
 
     //Bibliotecas de Testes
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "com.android.support.test:runner:$testRunnerVersion"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoVersion"
     androidTestImplementation "com.android.support.test.espresso:espresso-intents:$espressoVersion"
+    androidTestImplementation "com.android.support:support-annotations:$supportLibraryVersion"
+    androidTestImplementation "org.mockito:mockito-core:$mockitoVersion"
+    androidTestImplementation "org.mockito:mockito-android:$mockitoVersion"
+    androidTestImplementation "com.nhaarman:mockito-kotlin:1.5.0"
+    kaptAndroidTest "com.google.dagger:dagger-compiler:$daggerCompilerVersion"
 }

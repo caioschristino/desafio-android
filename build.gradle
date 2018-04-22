@@ -30,10 +30,11 @@ allprojects {
         picassoVersion = '2.5.2'
         retrofit2Version = '2.1.0'
         converterGsonVersion = '2.8.2'
-        daggerVersion = '2.9'
+        daggerCompilerVersion = '2.9'
+        daggerVersion = '2.11'
         drawableVersion = '26.1.0'
         ormLiteVersion = '4.48'
-
+        mockitoVersion = '2.6.3'
         rxJava2Version = '2.1.8'
         rxAndroidVersion = '2.0.1'
         rxJava2AdapterVersion = '2.0.2'
