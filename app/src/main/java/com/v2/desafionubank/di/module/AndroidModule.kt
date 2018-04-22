@@ -13,7 +13,7 @@ import javax.inject.Singleton
  */
 
 @Module
-class AndroidModule(private val mApplication: Application) {
+open class AndroidModule(private val mApplication: Application) {
     @Provides
     @Singleton
     @ApplicationContext

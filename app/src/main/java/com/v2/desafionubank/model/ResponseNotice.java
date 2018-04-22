@@ -15,6 +15,14 @@ public class ResponseNotice {
     @SerializedName("secondary_action")
     private NoticeAction secondaryAction;
 
+
+    public ResponseNotice() {
+    }
+
+    public ResponseNotice(Links links) {
+        this.links = links;
+    }
+
     public Links getLinks() {
         return links;
     }

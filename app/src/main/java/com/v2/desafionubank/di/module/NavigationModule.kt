@@ -10,7 +10,7 @@ import javax.inject.Singleton
  */
 
 @Module
-class NavigationModule {
+open class NavigationModule {
     @Provides
     @Singleton
     protected fun provideNavigationManager(): NavigationManager {

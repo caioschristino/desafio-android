@@ -33,11 +33,11 @@ constructor(@param:ApplicationContext val mContext: Context) {
         get() {
             val notice = mSharedPreferences!!.get(NOTICE_KEY, ResponseNotice::class.java) as ResponseNotice
             return mNuMobileApi!!
-                    .GetChargebackFromUrl(notice.links.chargeback!!.href)
+                    .GetChargebackFromUrl(notice.links?.chargeback!!.href)
                     .map(Function<ResponseChargeback, ResponseChargeback> { result ->
                         mSharedPreferences!!.put(CHARGEBACK_KEY, result)
                         mNuMobileApi!!
-                                .BlockUnblockCard(result.links!!.blockCard!!.href)
+                                .BlockUnblockCard(result.links?.blockCard!!.href)
                                 .map { responsePostBlockUnblockCard -> responsePostBlockUnblockCard }
                                 .subscribeOn(Schedulers.newThread())
                                 .observeOn(AndroidSchedulers.mainThread())

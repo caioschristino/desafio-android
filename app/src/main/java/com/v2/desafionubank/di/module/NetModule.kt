@@ -19,7 +19,7 @@ import javax.inject.Singleton
  */
 
 @Module
-class NetModule {
+open class NetModule {
     private val BASE_URL = "https://nu-mobile-hiring.herokuapp.com"
 
     @Provides

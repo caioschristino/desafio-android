@@ -2,12 +2,16 @@ package com.v2.desafionubank
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
+import android.util.Log
+import com.nhaarman.mockito_kotlin.doReturn
+import com.v2.desafionubank.api.NuMobileApi
+import com.v2.desafionubank.component.DaggerTestAppComponent
+import com.v2.desafionubank.component.TestAppComponent
 import com.v2.desafionubank.controller.SessionController
-import com.v2.desafionubank.di.module.AndroidModule
-import com.v2.desafionubank.di.module.NavigationModule
-import com.v2.desafionubank.di.module.NetModule
+import com.v2.desafionubank.model.LinkHref
+import com.v2.desafionubank.model.Links
 import com.v2.desafionubank.model.ResponseNotice
-import com.v2.desafionubank.ui.NavigationManager
+import com.v2.desafionubank.module.TestNetModule
 import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Test
@@ -15,10 +19,6 @@ import org.junit.runner.RunWith
 import org.mockito.MockitoAnnotations
 import javax.inject.Inject
 import org.mockito.Mockito.`when`
-import org.mockito.Mockito.`when`
-
-
-
 
 
 /**
@@ -29,29 +29,29 @@ import org.mockito.Mockito.`when`
 @RunWith(AndroidJUnit4::class)
 class ServiceInstrumentedTest {
     @Inject
-    lateinit var mSessionController: SessionController
+    lateinit var mNuMobileApi: NuMobileApi
 
-    private lateinit var testAppComponent: TestAppComponent
+    lateinit var testAppComponent: TestAppComponent
 
     @Before
     fun setup() {
         MockitoAnnotations.initMocks(this)
-        val app = InstrumentationRegistry.getTargetContext().applicationContext as ChargebackApplication
+        InstrumentationRegistry.getTargetContext().applicationContext as ChargebackApplication
         testAppComponent = DaggerTestAppComponent.builder()
-                .androidModule(AndroidModule(app))
-                .navigationModule(NavigationModule())
-                .netModule(NetModule())
+                .testNetModule(TestNetModule())
                 .build()
-        app.applicationComponent = testAppComponent
+
         testAppComponent.inject(this)
         System.out.println("==== TestAppComponent injected")
     }
 
     @Test
     fun whenLinkRequested_shouldValidateNoticeRequestModel() {
-        val mock = org.mockito.Mockito.mock(ResponseNotice::class.java)
+        val link = Links(LinkHref(""), null, null, null);
+        val response = org.mockito.Mockito.mock(ResponseNotice(Links(LinkHref("alguma_coisa")))::class.java)
 
-        `when`(mSessionController.getNotice("https://nu-mobile-hiring.herokuapp.com/"))
-                .thenReturn(Observable.just(mock))
+
+        `when`(mNuMobileApi.GetNoticeFromUrl("https://nu-mobile-hiring.herokuapp.com/notice"))
+                .thenReturn(Observable.just(response))
     }
 }
