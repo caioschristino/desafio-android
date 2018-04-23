@@ -26,4 +26,7 @@ interface NuMobileApi {
 
     @POST
     fun SendContest(@Url url: String, @Body requestLockCard: RequestLockCard): Observable<ResponsePost>
+
+    @GET
+    fun GetFromUrl(@Url url: String): Observable<Object>
 }

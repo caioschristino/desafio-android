@@ -8,17 +8,23 @@ import com.v2.desafionubank.api.NuMobileApi
 import com.v2.desafionubank.component.DaggerTestAppComponent
 import com.v2.desafionubank.component.TestAppComponent
 import com.v2.desafionubank.controller.SessionController
+import com.v2.desafionubank.data.SharedPreferenceHelper
+import com.v2.desafionubank.di.module.AndroidModule
 import com.v2.desafionubank.model.LinkHref
 import com.v2.desafionubank.model.Links
+import com.v2.desafionubank.model.ResponseChargeback
 import com.v2.desafionubank.model.ResponseNotice
 import com.v2.desafionubank.module.TestNetModule
-import io.reactivex.Observable
+import io.reactivex.functions.Consumer
+import io.reactivex.observers.TestObserver
+
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import javax.inject.Inject
-import org.mockito.Mockito.`when`
 
 
 /**
@@ -28,17 +34,24 @@ import org.mockito.Mockito.`when`
 
 @RunWith(AndroidJUnit4::class)
 class ServiceInstrumentedTest {
+    var mObserverNotice = TestObserver<ResponseNotice>()
+    var mObserverChargeback = TestObserver<ResponseChargeback>()
+
     @Inject
-    lateinit var mNuMobileApi: NuMobileApi
+    lateinit var mPrePreferenceHelper: SharedPreferenceHelper
+
+    @Inject
+    lateinit var mSession: SessionController
 
     lateinit var testAppComponent: TestAppComponent
 
     @Before
     fun setup() {
         MockitoAnnotations.initMocks(this)
-        InstrumentationRegistry.getTargetContext().applicationContext as ChargebackApplication
+        val app = InstrumentationRegistry.getTargetContext().applicationContext as ChargebackApplication
         testAppComponent = DaggerTestAppComponent.builder()
                 .testNetModule(TestNetModule())
+                .androidModule(AndroidModule(app))
                 .build()
 
         testAppComponent.inject(this)
@@ -47,11 +60,22 @@ class ServiceInstrumentedTest {
 
     @Test
     fun whenLinkRequested_shouldValidateNoticeRequestModel() {
-        val link = Links(LinkHref(""), null, null, null);
-        val response = org.mockito.Mockito.mock(ResponseNotice(Links(LinkHref("alguma_coisa")))::class.java)
+        mSession.getNotice("https://nu-mobile-hiring.herokuapp.com/")
+                .subscribe(mObserverNotice)
 
+        mObserverNotice.awaitTerminalEvent()
+        Assert.assertEquals(0, mObserverNotice.errorCount())
+    }
 
-        `when`(mNuMobileApi.GetNoticeFromUrl("https://nu-mobile-hiring.herokuapp.com/notice"))
-                .thenReturn(Observable.just(response))
+    @Test
+    fun whenLinkRequested_shouldValidateChargeBackRequestModel() {
+        mSession.getNotice("https://nu-mobile-hiring.herokuapp.com/")
+                .subscribe(mObserverNotice)
+
+        mObserverNotice.awaitTerminalEvent()
+        Assert.assertEquals(0, mObserverNotice.errorCount())
+
+        mSession.getChargeback()
+                .subscribe(mObserverChargeback)
     }
 }

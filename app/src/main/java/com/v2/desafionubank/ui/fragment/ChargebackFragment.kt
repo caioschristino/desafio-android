@@ -48,7 +48,7 @@ class ChargebackFragment : BaseFragment() {
         }
 
         mSessionController
-                ?.chargeback
+                ?.getChargeback()
                 ?.subscribe(object : ObserverController<ResponseChargeback>(activity.applicationContext) {
                     override fun onResult(item: ResponseChargeback) {
                         if (item != null) {
