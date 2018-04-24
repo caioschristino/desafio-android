@@ -6,15 +6,12 @@ import com.v2.desafionubank.ui.activity.MainActivity
 import org.junit.Rule
 import org.junit.runner.RunWith
 import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.ViewAssertion
-import android.support.test.espresso.action.ViewActions
+import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.assertion.ViewAssertions
-import android.support.test.espresso.intent.Intents
 import android.support.test.espresso.matcher.ViewMatchers.*
-import kotlinx.android.synthetic.main.notice_fragment.*
+import com.v2.desafionubank.component.RecyclerViewItemCountAssertion
+import com.v2.desafionubank.component.RecyclerViewMatcher
 import org.hamcrest.Matchers
-import org.junit.After
-import org.junit.Before
 import org.junit.Test
 
 /**
@@ -28,20 +25,29 @@ class MainActivityTest {
     var mActivityRule: ActivityTestRule<MainActivity> = ActivityTestRule(MainActivity::class.java, false, true)
 
     @Test
-    fun whenActivityIsLaunched_shouldDisplayInitialState() {
+    fun whenNoticeFragmentIsLaunched_shouldDisplayInitialState() {
         onView(withId(R.id.title_notice)).check(ViewAssertions.matches(isDisplayed()))
         onView(withId(R.id.body_notice)).check(ViewAssertions.matches(isDisplayed()))
         onView(withId(R.id.recycle_action))
                 .check(RecyclerViewItemCountAssertion.Companion.withItemCount(Matchers.greaterThan(0)))
+
+        onView(RecyclerViewMatcher(R.id.recycle_action).atPosition(0))
+                .perform(click())
+
+        onView(withId(R.id.about_block)).check(ViewAssertions.matches(isDisplayed()))
     }
 
-    @Before
-    fun initIntents() {
-        Intents.init()
-    }
+    @Test
+    fun whenChargebackFragmentIsLaunched_shouldDisplayInitialState() {
+        onView(RecyclerViewMatcher(R.id.recycle_action).atPosition(0))
+                .perform(click())
 
-    @After
-    fun releaseIntents() {
-        Intents.release()
+        onView(withId(R.id.about_block)).check(ViewAssertions.matches(isDisplayed()))
+        onView(withId(R.id.chargeback_title)).check(ViewAssertions.matches(isDisplayed()))
+        onView(withId(R.id.container_block)).check(ViewAssertions.matches(isDisplayed()))
+        onView(withId(R.id.chargeback_title)).check(ViewAssertions.matches(isDisplayed()))
+
+        onView(withId(R.id.recycle_details))
+                .check(RecyclerViewItemCountAssertion.Companion.withItemCount(Matchers.greaterThan(0)))
     }
 }
