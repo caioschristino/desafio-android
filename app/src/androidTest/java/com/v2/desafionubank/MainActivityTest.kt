@@ -11,6 +11,7 @@ import android.support.test.espresso.assertion.ViewAssertions
 import android.support.test.espresso.matcher.ViewMatchers.*
 import com.v2.desafionubank.assertions.RecyclerViewItemCountAssertion
 import com.v2.desafionubank.assertions.RecyclerViewMatcher
+import kotlinx.android.synthetic.main.chargeback_fragment.*
 import org.hamcrest.Matchers
 import org.junit.Test
 
@@ -20,7 +21,7 @@ import org.junit.Test
 
 @RunWith(AndroidJUnit4::class)
 class MainActivityTest {
-
+    
     @Rule
     @JvmField
     var mActivityRule: ActivityTestRule<MainActivity> =
@@ -28,61 +29,64 @@ class MainActivityTest {
 
     @Test
     fun whenNoticeFragmentIsLaunched_shouldDisplayInitialState() {
-        verifyDisplayedNoticeFragment()
+        verifyNoticeFragmentDisplayed()
     }
 
     @Test
     fun whenChargebackFragmentIsLaunched_shouldDisplayInitialState() {
         onView(RecyclerViewMatcher(R.id.recycle_action).atPosition(0))
                 .perform(click())
-
-        verifyDisplayedChargebackFragment()
+        verifyChargebackFragmentDisplayed()
     }
 
     @Test
     fun whenChargebackFragmentIsLaunched_shouldCloseFunctionState() {
-        verifyDisplayedNoticeFragment()
+        verifyNoticeFragmentDisplayed()
         onView(RecyclerViewMatcher(R.id.recycle_action).atPosition(0))
                 .perform(click())
-        verifyDisplayedChargebackFragment()
+        verifyChargebackFragmentDisplayed()
 
-        onView(RecyclerViewMatcher(R.id.recycle_details).atPosition(0))
+        onView(withId(R.id.cancel_btn))
                 .perform(click())
-        verifyDisplayedNoticeFragment()
+        verifyNoticeFragmentDisplayed()
     }
 
     @Test
     fun whenChargebackFragmentIsLaunched_shouldContestFunctionState() {
-        verifyDisplayedNoticeFragment()
+        verifyNoticeFragmentDisplayed()
+
         onView(RecyclerViewMatcher(R.id.recycle_action).atPosition(0))
                 .perform(click())
-        verifyDisplayedChargebackFragment()
+        verifyChargebackFragmentDisplayed()
 
-        onView(RecyclerViewMatcher(R.id.recycle_details).atPosition(1))
+
+        onView(withId(R.id.contest_btn))
                 .perform(click())
+        verifyViewDialogDisplayed()
 
-        verifyDisplayedViewDialog()
         onView(withId(R.id.dialog_close))
                 .perform(click())
-        verifyDisplayedNoticeFragment()
+        verifyNoticeFragmentDisplayed()
     }
 
-    fun verifyDisplayedViewDialog() {
-        onView(withId(R.layout.dialog)).check(ViewAssertions.matches(isDisplayed()))
+    fun verifyViewDialogDisplayed() {
+        onView(withId(R.id.title_dialog)).check(ViewAssertions.matches(isDisplayed()))
         onView(withId(R.id.dialog_close)).check(ViewAssertions.matches(isDisplayed()))
     }
 
-    fun verifyDisplayedNoticeFragment() {
+    fun verifyNoticeFragmentDisplayed() {
         onView(withId(R.id.title_notice)).check(ViewAssertions.matches(isDisplayed()))
         onView(withId(R.id.body_notice)).check(ViewAssertions.matches(isDisplayed()))
         onView(withId(R.id.recycle_action))
                 .check(RecyclerViewItemCountAssertion.Companion.withItemCount(Matchers.greaterThan(0)))
     }
 
-    fun verifyDisplayedChargebackFragment() {
+    fun verifyChargebackFragmentDisplayed() {
         onView(withId(R.id.about_block)).check(ViewAssertions.matches(isDisplayed()))
         onView(withId(R.id.chargeback_title)).check(ViewAssertions.matches(isDisplayed()))
         onView(withId(R.id.container_block)).check(ViewAssertions.matches(isDisplayed()))
+        onView(withId(R.id.contest_btn)).check(ViewAssertions.matches(isDisplayed()))
+        onView(withId(R.id.cancel_btn)).check(ViewAssertions.matches(isDisplayed()))
         onView(withId(R.id.recycle_details))
                 .check(RecyclerViewItemCountAssertion.Companion.withItemCount(Matchers.greaterThan(0)))
     }
