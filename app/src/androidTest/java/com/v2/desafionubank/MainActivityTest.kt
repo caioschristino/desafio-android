@@ -41,22 +41,30 @@ class MainActivityTest {
 
     @Test
     fun whenChargebackFragmentIsLaunched_shouldCloseFunctionState() {
+        verifyDisplayedNoticeFragment()
         onView(RecyclerViewMatcher(R.id.recycle_action).atPosition(0))
                 .perform(click())
+        verifyDisplayedChargebackFragment()
+
         onView(RecyclerViewMatcher(R.id.recycle_details).atPosition(0))
                 .perform(click())
-
         verifyDisplayedNoticeFragment()
     }
 
     @Test
     fun whenChargebackFragmentIsLaunched_shouldContestFunctionState() {
+        verifyDisplayedNoticeFragment()
         onView(RecyclerViewMatcher(R.id.recycle_action).atPosition(0))
                 .perform(click())
+        verifyDisplayedChargebackFragment()
+
         onView(RecyclerViewMatcher(R.id.recycle_details).atPosition(1))
                 .perform(click())
 
         verifyDisplayedViewDialog()
+        onView(withId(R.id.dialog_close))
+                .perform(click())
+        verifyDisplayedNoticeFragment()
     }
 
     fun verifyDisplayedViewDialog() {
