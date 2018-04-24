@@ -48,8 +48,8 @@ class ChargebackFragment : BaseFragment() {
         }
 
         mSessionController
-                ?.getChargeback()
-                ?.subscribe(object : ObserverController<ResponseChargeback>(activity.applicationContext) {
+                .getChargeback()
+                .subscribe(object : ObserverController<ResponseChargeback>(activity.applicationContext) {
                     override fun onResult(item: ResponseChargeback) {
                         if (item != null) {
                             container_block.visibility = View.VISIBLE
@@ -77,10 +77,10 @@ class ChargebackFragment : BaseFragment() {
 
         contest_btn.setOnClickListener {
             mSessionController
-                    ?.sendContest(about_block.text.toString(), adapter.getmItems())
-                    ?.subscribe(object : ObserverController<ResponsePost>(activity.applicationContext) {
+                    .sendContest(about_block.text.toString(), adapter.getmItems())
+                    .subscribe(object : ObserverController<ResponsePost>(activity.applicationContext) {
                         override fun onResult(item: ResponsePost) {
-                            if (item.status.equals("O4k")) {
+                            if (item.status.equals("Ok")) {
                                 ViewDialog().showDialog(activity, listener = object : ViewDialog.ViewDialogListener {
                                     override fun onDismiss() {
                                         popSelf()
@@ -105,8 +105,8 @@ class ChargebackFragment : BaseFragment() {
 
     private fun blockUnblockCard(block: Boolean) {
         mSessionController
-                ?.blockUnblockCard(block)
-                ?.subscribe(object : ObserverController<ResponsePost>(activity.applicationContext) {
+                .blockUnblockCard(block)
+                .subscribe(object : ObserverController<ResponsePost>(activity.applicationContext) {
                     override fun onResult(item: ResponsePost) {
                         if (item.isBlock) {
                             padlock_lock.text = getString(R.string.text_lock_on)
