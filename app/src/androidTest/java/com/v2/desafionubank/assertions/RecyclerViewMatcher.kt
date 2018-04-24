@@ -1,4 +1,4 @@
-package com.v2.desafionubank.component
+package com.v2.desafionubank.assertions
 
 import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
@@ -19,7 +19,6 @@ class RecyclerViewMatcher(private val recyclerViewId: Int) {
     }
 
     fun atPositionOnView(position: Int, targetViewId: Int): Matcher<View> {
-
         return object : TypeSafeMatcher<View>() {
             internal var resources: Resources? = null
             internal var childView: View? = null

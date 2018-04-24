@@ -9,8 +9,8 @@ import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.assertion.ViewAssertions
 import android.support.test.espresso.matcher.ViewMatchers.*
-import com.v2.desafionubank.component.RecyclerViewItemCountAssertion
-import com.v2.desafionubank.component.RecyclerViewMatcher
+import com.v2.desafionubank.assertions.RecyclerViewItemCountAssertion
+import com.v2.desafionubank.assertions.RecyclerViewMatcher
 import org.hamcrest.Matchers
 import org.junit.Test
 

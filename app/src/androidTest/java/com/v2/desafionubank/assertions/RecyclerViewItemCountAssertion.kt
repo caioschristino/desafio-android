@@ -1,4 +1,4 @@
-package com.v2.desafionubank.component
+package com.v2.desafionubank.assertions
 
 import android.support.v7.widget.RecyclerView
 import android.support.test.espresso.NoMatchingViewException
