@@ -1,6 +1,5 @@
 package com.v2.desafionubank.di
 
-import javax.inject.Qualifier
 import javax.inject.Scope
 
 /**

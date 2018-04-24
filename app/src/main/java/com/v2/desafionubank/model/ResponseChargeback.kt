@@ -1,7 +1,6 @@
 package com.v2.desafionubank.model
 
 import com.google.gson.annotations.SerializedName
-import java.util.*
 
 /**
  * Created by CaioSChristino on 18/04/18.

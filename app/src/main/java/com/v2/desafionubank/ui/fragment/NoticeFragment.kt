@@ -1,7 +1,5 @@
 package com.v2.desafionubank.ui.fragment
 
-import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -9,7 +7,6 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import com.v2.desafionubank.R
 import com.v2.desafionubank.adapter.RecyclerViewAdapter
 import com.v2.desafionubank.controller.ObserverController
@@ -18,7 +15,7 @@ import com.v2.desafionubank.model.ResponseNotice
 import com.v2.desafionubank.ui.BaseFragment
 import com.v2.desafionubank.ui.view.ActionViewHolder
 import kotlinx.android.synthetic.main.notice_fragment.*
-import java.util.ArrayList
+import java.util.*
 
 /**
  * Created by CaioSChristino on 18/04/18.

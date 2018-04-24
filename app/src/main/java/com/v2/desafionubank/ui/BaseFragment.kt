@@ -14,7 +14,6 @@ import com.v2.desafionubank.controller.SessionController
 import com.v2.desafionubank.di.component.DaggerFragmentComponent
 import com.v2.desafionubank.di.component.FragmentComponent
 import com.v2.desafionubank.di.module.FragmentModule
-import com.v2.desafionubank.model.ResponseError
 import javax.inject.Inject
 
 /**

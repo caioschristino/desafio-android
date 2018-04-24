@@ -2,17 +2,12 @@ package com.v2.desafionubank
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
-import android.util.Log
-import com.nhaarman.mockito_kotlin.doReturn
-import com.v2.desafionubank.api.NuMobileApi
 import com.v2.desafionubank.component.DaggerTestAppComponent
 import com.v2.desafionubank.component.TestAppComponent
 import com.v2.desafionubank.controller.SessionController
-import com.v2.desafionubank.data.SharedPreferenceHelper
 import com.v2.desafionubank.di.module.AndroidModule
 import com.v2.desafionubank.model.*
 import com.v2.desafionubank.module.TestNetModule
-import io.reactivex.functions.Consumer
 import io.reactivex.observers.TestObserver
 
 import org.junit.Assert
