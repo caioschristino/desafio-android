@@ -53,10 +53,10 @@ class ChargebackFragment : BaseFragment() {
                     override fun onResult(item: ResponseChargeback) {
                         if (item != null) {
                             container_block.visibility = View.VISIBLE
-                            about_block.hint = Html.fromHtml(item.comment_hint)
+                            about_block.hint = Html.fromHtml(item.hint)
                             chargeback_title.text = item.title
                             padlock_image.setImageDrawable(resources.getDrawable(R.drawable.ic_chargeback_lock))
-                            adapter.addItems(item.reason_details!!)
+                            adapter.addItems(item.details!!)
                             recycle_details.adapter = adapter
                         }
                     }

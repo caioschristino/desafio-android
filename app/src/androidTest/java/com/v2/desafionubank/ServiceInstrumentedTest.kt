@@ -10,10 +10,7 @@ import com.v2.desafionubank.component.TestAppComponent
 import com.v2.desafionubank.controller.SessionController
 import com.v2.desafionubank.data.SharedPreferenceHelper
 import com.v2.desafionubank.di.module.AndroidModule
-import com.v2.desafionubank.model.LinkHref
-import com.v2.desafionubank.model.Links
-import com.v2.desafionubank.model.ResponseChargeback
-import com.v2.desafionubank.model.ResponseNotice
+import com.v2.desafionubank.model.*
 import com.v2.desafionubank.module.TestNetModule
 import io.reactivex.functions.Consumer
 import io.reactivex.observers.TestObserver
@@ -36,6 +33,7 @@ import javax.inject.Inject
 class ServiceInstrumentedTest {
     var mObserverNotice = TestObserver<ResponseNotice>()
     var mObserverChargeback = TestObserver<ResponseChargeback>()
+    var mObserverResponsePost = TestObserver<ResponsePost>()
 
     @Inject
     lateinit var mPrePreferenceHelper: SharedPreferenceHelper
@@ -55,11 +53,11 @@ class ServiceInstrumentedTest {
                 .build()
 
         testAppComponent.inject(this)
-        System.out.println("==== TestAppComponent injected")
     }
 
     @Test
-    fun whenLinkRequested_shouldValidateNoticeRequestModel() {
+    fun whenLinkRequested_shouldValidateResponseNoticeModel() {
+
         mSession.getNotice("https://nu-mobile-hiring.herokuapp.com/")
                 .subscribe(mObserverNotice)
 
@@ -68,14 +66,51 @@ class ServiceInstrumentedTest {
     }
 
     @Test
-    fun whenLinkRequested_shouldValidateChargeBackRequestModel() {
-        mSession.getNotice("https://nu-mobile-hiring.herokuapp.com/")
-                .subscribe(mObserverNotice)
-
-        mObserverNotice.awaitTerminalEvent()
-        Assert.assertEquals(0, mObserverNotice.errorCount())
-
+    fun whenNoticeRequested_shouldValidateResponseChargebackModel() {
+        Assert.assertNotNull(mSession.getNoticeCached())
         mSession.getChargeback()
                 .subscribe(mObserverChargeback)
+
+        mObserverChargeback.awaitTerminalEvent()
+        Assert.assertEquals(0, mObserverChargeback.errorCount())
+    }
+
+    @Test
+    fun whenBlockRequested_shouldValidateResponsePostModel() {
+        Assert.assertNotNull(mSession.getChargebackCached())
+        mSession.blockUnblockCard(true)
+                .subscribe(mObserverResponsePost)
+
+        mObserverResponsePost.awaitTerminalEvent()
+        Assert.assertEquals(0, mObserverResponsePost.errorCount())
+
+        var item = mObserverResponsePost.values().get(0)
+        Assert.assertTrue(item.status.equals("Ok"))
+    }
+
+    @Test
+    fun whenUnBlockRequested_shouldValidateResponsePostModel() {
+        Assert.assertNotNull(mSession.getChargebackCached())
+        mSession.blockUnblockCard(false)
+                .subscribe(mObserverResponsePost)
+
+        mObserverResponsePost.awaitTerminalEvent()
+        Assert.assertEquals(0, mObserverResponsePost.errorCount())
+
+        var item = mObserverResponsePost.values().get(0)
+        Assert.assertTrue(item.status.equals("Ok"))
+    }
+
+    @Test
+    fun whenContestRequested_shouldValidateResponsePostModel() {
+        Assert.assertNotNull(mSession.getChargebackCached())
+        mSession.sendContest("test contest", listOf())
+                .subscribe(mObserverResponsePost)
+
+        mObserverResponsePost.awaitTerminalEvent()
+        Assert.assertEquals(0, mObserverResponsePost.errorCount())
+
+        var item = mObserverResponsePost.values().get(0)
+        Assert.assertTrue(item.status.equals("Ok"))
     }
 }

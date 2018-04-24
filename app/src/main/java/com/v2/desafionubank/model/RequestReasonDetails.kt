@@ -4,7 +4,7 @@ package com.v2.desafionubank.model
  * Created by CaioSChristino on 18/04/18.
  */
 
-data class RequestReasonDetails(val reasonDetails: ReasonDetails) {
+class RequestReasonDetails(val reasonDetails: ReasonDetails) {
     private val id: String?
     private val response: Boolean
 

@@ -6,9 +6,9 @@ import java.util.*
  * Created by CaioSChristino on 18/04/18.
  */
 
-data class RequestLockCard(private val comment: String,
+class RequestLockCard(private val comment: String,
                            private val _details: List<ReasonDetails>) {
-    private val reason_details = ArrayList<RequestReasonDetails>()
+    val reason_details = ArrayList<RequestReasonDetails>()
 
     init {
         for (detail in _details) {

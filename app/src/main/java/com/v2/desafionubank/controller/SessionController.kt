@@ -30,7 +30,7 @@ constructor(@param:ApplicationContext val mContext: Context) {
     lateinit var mSharedPreferences: SharedPreferenceHelper
 
     fun getChargeback(): Observable<ResponseChargeback> {
-        val notice = mSharedPreferences!!.get(NOTICE_KEY, ResponseNotice::class.java) as ResponseNotice
+        val notice = getNoticeCached()
         return mNuMobileApi!!
                 .GetChargebackFromUrl(notice.links?.chargeback!!.href)
                 .map(Function<ResponseChargeback, ResponseChargeback> { result ->
@@ -53,7 +53,7 @@ constructor(@param:ApplicationContext val mContext: Context) {
                 .GetBodyRequestFromUrl(linkUrl)
                 .map { result ->
                     val observable = mNuMobileApi!!
-                            .GetNoticeFromUrl(result.links.notice!!.href)
+                            .GetNoticeFromUrl(result.links?.notice!!.href)
                             .map { noticeResult ->
                                 mSharedPreferences!!.put(NOTICE_KEY, noticeResult)
                                 noticeResult

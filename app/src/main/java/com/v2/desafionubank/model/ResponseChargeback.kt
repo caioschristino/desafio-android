@@ -1,5 +1,6 @@
 package com.v2.desafionubank.model
 
+import com.google.gson.annotations.SerializedName
 import java.util.*
 
 /**
@@ -11,6 +12,8 @@ class ResponseChargeback {
     val id: String? = null
     val title: String? = null
     val links: Links? = null
-    val comment_hint: String? = null
-    val reason_details: MutableList<ReasonDetails>? = null
+    @SerializedName("comment_hint")
+    val hint: String? = null
+    @SerializedName("reason_details")
+    val details: MutableList<ReasonDetails>? = null
 }
