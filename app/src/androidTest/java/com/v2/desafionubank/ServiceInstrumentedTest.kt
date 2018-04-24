@@ -3,7 +3,6 @@ package com.v2.desafionubank
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 import com.v2.desafionubank.component.DaggerTestAppComponent
-import com.v2.desafionubank.component.TestAppComponent
 import com.v2.desafionubank.controller.SessionController
 import com.v2.desafionubank.di.module.AndroidModule
 import com.v2.desafionubank.model.*
@@ -21,7 +20,6 @@ import javax.inject.Inject
  * Created by CaioSChristino on 20/04/18.
  */
 
-
 @RunWith(AndroidJUnit4::class)
 class ServiceInstrumentedTest {
     var mObserverNotice = TestObserver<ResponseNotice>()
@@ -31,17 +29,14 @@ class ServiceInstrumentedTest {
     @Inject
     lateinit var mSession: SessionController
 
-    lateinit var testAppComponent: TestAppComponent
-
     @Before
     fun setup() {
         val app = InstrumentationRegistry.getTargetContext().applicationContext as ChargebackApplication
-        testAppComponent = DaggerTestAppComponent.builder()
+        DaggerTestAppComponent.builder()
                 .testNetModule(TestNetModule())
                 .androidModule(AndroidModule(app))
                 .build()
-
-        testAppComponent.inject(this)
+                .inject(this)
     }
 
     @Test
