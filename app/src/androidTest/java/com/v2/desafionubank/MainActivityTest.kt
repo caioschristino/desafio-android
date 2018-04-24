@@ -20,21 +20,15 @@ import org.junit.Test
 
 @RunWith(AndroidJUnit4::class)
 class MainActivityTest {
+
     @Rule
     @JvmField
-    var mActivityRule: ActivityTestRule<MainActivity> = ActivityTestRule(MainActivity::class.java, false, true)
+    var mActivityRule: ActivityTestRule<MainActivity> =
+            ActivityTestRule(MainActivity::class.java, false, true)
 
     @Test
     fun whenNoticeFragmentIsLaunched_shouldDisplayInitialState() {
-        onView(withId(R.id.title_notice)).check(ViewAssertions.matches(isDisplayed()))
-        onView(withId(R.id.body_notice)).check(ViewAssertions.matches(isDisplayed()))
-        onView(withId(R.id.recycle_action))
-                .check(RecyclerViewItemCountAssertion.Companion.withItemCount(Matchers.greaterThan(0)))
-
-        onView(RecyclerViewMatcher(R.id.recycle_action).atPosition(0))
-                .perform(click())
-
-        onView(withId(R.id.about_block)).check(ViewAssertions.matches(isDisplayed()))
+        verifyDisplayedNoticeFragment()
     }
 
     @Test
@@ -42,11 +36,45 @@ class MainActivityTest {
         onView(RecyclerViewMatcher(R.id.recycle_action).atPosition(0))
                 .perform(click())
 
+        verifyDisplayedChargebackFragment()
+    }
+
+    @Test
+    fun whenChargebackFragmentIsLaunched_shouldCloseFunctionState() {
+        onView(RecyclerViewMatcher(R.id.recycle_action).atPosition(0))
+                .perform(click())
+        onView(RecyclerViewMatcher(R.id.recycle_details).atPosition(0))
+                .perform(click())
+
+        verifyDisplayedNoticeFragment()
+    }
+
+    @Test
+    fun whenChargebackFragmentIsLaunched_shouldContestFunctionState() {
+        onView(RecyclerViewMatcher(R.id.recycle_action).atPosition(0))
+                .perform(click())
+        onView(RecyclerViewMatcher(R.id.recycle_details).atPosition(1))
+                .perform(click())
+
+        verifyDisplayedViewDialog()
+    }
+
+    fun verifyDisplayedViewDialog() {
+        onView(withId(R.layout.dialog)).check(ViewAssertions.matches(isDisplayed()))
+        onView(withId(R.id.dialog_close)).check(ViewAssertions.matches(isDisplayed()))
+    }
+
+    fun verifyDisplayedNoticeFragment() {
+        onView(withId(R.id.title_notice)).check(ViewAssertions.matches(isDisplayed()))
+        onView(withId(R.id.body_notice)).check(ViewAssertions.matches(isDisplayed()))
+        onView(withId(R.id.recycle_action))
+                .check(RecyclerViewItemCountAssertion.Companion.withItemCount(Matchers.greaterThan(0)))
+    }
+
+    fun verifyDisplayedChargebackFragment() {
         onView(withId(R.id.about_block)).check(ViewAssertions.matches(isDisplayed()))
         onView(withId(R.id.chargeback_title)).check(ViewAssertions.matches(isDisplayed()))
         onView(withId(R.id.container_block)).check(ViewAssertions.matches(isDisplayed()))
-        onView(withId(R.id.chargeback_title)).check(ViewAssertions.matches(isDisplayed()))
-
         onView(withId(R.id.recycle_details))
                 .check(RecyclerViewItemCountAssertion.Companion.withItemCount(Matchers.greaterThan(0)))
     }
