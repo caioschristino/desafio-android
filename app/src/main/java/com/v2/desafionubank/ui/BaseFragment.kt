@@ -66,16 +66,12 @@ abstract class BaseFragment : Fragment() {
     }
 
     fun pushFragment(fragment: BaseFragment) {
-        if (mNavigationManager != null) {
-            mNavigationManager!!.pushFragment(fragment)
-        }
+        mNavigationManager.pushFragment(fragment)
     }
 
     fun popSelf() {
         hideKeyboard()
-        if (mNavigationManager != null) {
-            mNavigationManager!!.popFragment((activity as BaseMain).setBackNavigationListener())
-        }
+        mNavigationManager.popFragment((activity as BaseMain).setBackNavigationListener())
     }
 
     fun hideKeyboard() {

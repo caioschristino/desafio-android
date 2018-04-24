@@ -33,9 +33,9 @@ class NoticeFragment : BaseFragment() {
         recycle_action!!.layoutManager = LinearLayoutManager(activity)
         adapter = object : RecyclerViewAdapter<NoticeAction>(activity.applicationContext) {
             override fun setViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
-                val view = LayoutInflater.from(context)
+                val mView = LayoutInflater.from(context)
                         .inflate(R.layout.action_item, parent, false)
-                return ActionViewHolder(view)
+                return ActionViewHolder(mView)
             }
 
             override fun onBindData(holder: RecyclerView.ViewHolder, item: NoticeAction) {
@@ -52,8 +52,8 @@ class NoticeFragment : BaseFragment() {
         }
 
         mSessionController
-                ?.getNotice("https://nu-mobile-hiring.herokuapp.com/")
-                ?.subscribe(object : ObserverController<ResponseNotice>(activity.applicationContext) {
+                .getNotice("https://nu-mobile-hiring.herokuapp.com/")
+                .subscribe(object : ObserverController<ResponseNotice>(activity.applicationContext) {
                     override fun onResult(item: ResponseNotice) {
                         title_notice!!.text = item.title
                         body_notice!!.text = Html.fromHtml(item.description)
