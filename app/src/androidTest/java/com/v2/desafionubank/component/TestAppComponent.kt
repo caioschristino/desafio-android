@@ -19,6 +19,4 @@ interface TestAppComponent {
     fun inject(test: ServiceInstrumentedTest)
 
     val mSession: SessionController
-
-    val preferenceHelper: SharedPreferenceHelper
 }

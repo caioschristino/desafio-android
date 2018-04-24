@@ -36,9 +36,6 @@ class ServiceInstrumentedTest {
     var mObserverResponsePost = TestObserver<ResponsePost>()
 
     @Inject
-    lateinit var mPrePreferenceHelper: SharedPreferenceHelper
-
-    @Inject
     lateinit var mSession: SessionController
 
     lateinit var testAppComponent: TestAppComponent
