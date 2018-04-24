@@ -19,8 +19,6 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.MockitoAnnotations
 import javax.inject.Inject
 
 
@@ -42,7 +40,6 @@ class ServiceInstrumentedTest {
 
     @Before
     fun setup() {
-        MockitoAnnotations.initMocks(this)
         val app = InstrumentationRegistry.getTargetContext().applicationContext as ChargebackApplication
         testAppComponent = DaggerTestAppComponent.builder()
                 .testNetModule(TestNetModule())
@@ -54,7 +51,6 @@ class ServiceInstrumentedTest {
 
     @Test
     fun whenLinkRequested_shouldValidateResponseNoticeModel() {
-
         mSession.getNotice("https://nu-mobile-hiring.herokuapp.com/")
                 .subscribe(mObserverNotice)
 
@@ -81,7 +77,7 @@ class ServiceInstrumentedTest {
         mObserverResponsePost.awaitTerminalEvent()
         Assert.assertEquals(0, mObserverResponsePost.errorCount())
 
-        var item = mObserverResponsePost.values().get(0)
+        var item = mObserverResponsePost.values()[0]
         Assert.assertTrue(item.status.equals("Ok"))
     }
 
@@ -94,7 +90,7 @@ class ServiceInstrumentedTest {
         mObserverResponsePost.awaitTerminalEvent()
         Assert.assertEquals(0, mObserverResponsePost.errorCount())
 
-        var item = mObserverResponsePost.values().get(0)
+        var item = mObserverResponsePost.values()[0]
         Assert.assertTrue(item.status.equals("Ok"))
     }
 
@@ -107,7 +103,7 @@ class ServiceInstrumentedTest {
         mObserverResponsePost.awaitTerminalEvent()
         Assert.assertEquals(0, mObserverResponsePost.errorCount())
 
-        var item = mObserverResponsePost.values().get(0)
+        var item = mObserverResponsePost.values()[0]
         Assert.assertTrue(item.status.equals("Ok"))
     }
 }
