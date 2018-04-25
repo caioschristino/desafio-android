@@ -10,6 +10,6 @@
     <string name="switch_on">sim</string>
     <string name="switch_off">não</string>
     <string name="icon_error">;(</string>
-    <string name="error_ops">ops!</string>
-    <string name="error_text">Ops! Tivemos um problema ao executar sua requisição. Tente novamente!</string>
+    <string name="error_ops">Ops!</string>
+    <string name="error_text">Tivemos um problema ao executar sua requisição. Tente novamente!</string>
 </resources>

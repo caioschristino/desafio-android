@@ -19,7 +19,7 @@ class ReasonDetailsViewHolder(view: View) : BaseViewHolder(view) {
             this.item.isSelected = isChecked
             if (isChecked) {
                 itemView.findViewById<Switch>(R.id.switch_about).textOn = res.getString(R.string.switch_on)
-                itemView.findViewById<TextView>(R.id.about).setTextColor(itemView.context.resources.getColor(R.color.colorRed))
+                itemView.findViewById<TextView>(R.id.about).setTextColor(itemView.context.resources.getColor(R.color.colorGreen))
             } else {
                 itemView.findViewById<Switch>(R.id.switch_about).textOn = res.getString(R.string.switch_off)
                 itemView.findViewById<TextView>(R.id.about).setTextColor(itemView.context.resources.getColor(R.color.colorTexts))
