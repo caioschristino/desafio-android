@@ -1,7 +1,4 @@
-# desafio NuBank
-
-Neste desafio, utilizaremos Dagger2 para realizar a Injeção de dependência, trabalhando com o paradigma da programação voltada a interface e não à implementação.
-
+# desafio
 Pela Complexidade do projeto, optei pelo padrão MVC, injetando o controller na camada de apresentação.
 
 Utilizou-se RXJava para controle de entrega assíncrona e explorando a programação reativa funcional assim como o padrão observable.
