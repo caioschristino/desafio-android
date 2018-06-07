@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Desafio Nubank</string>
+    <string name="app_name">Desafio</string>
     <string name="text_lock_on">Cartão desbloqueado, recomendamos mantê-lo bloqueado.</string>
     <string name="text_lock_off">Bloqueamos preventivamenteo seu cartão.</string>
     <string name="cancel_btn">CANCELAR</string>
